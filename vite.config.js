@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'  // เพิ่มบรรทั�
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],  // เพิ่ม tailwindcss() ใน array นี้
   base: '/webclick/',
+  plugins: [react(), tailwindcss()],  // เพิ่ม tailwindcss() ใน array นี้
+  
 })
