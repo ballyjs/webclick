@@ -1,4 +1,4 @@
-name: Deploy Vite Project to GitHub Pages
+name: Deploy Vite to GitHub Pages
 
 on:
   push:
@@ -12,7 +12,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -29,14 +28,19 @@ jobs:
         run: npm run build
 
       - name: Upload Build Artifact
+        # ตัวนี้เป็นเวอร์ชันที่ GitHub แนะนำใช้แทน upload-artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist    # Vite build output
+          path: ./dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+        id: deployment
